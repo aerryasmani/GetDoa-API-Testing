@@ -1,8 +1,8 @@
 # Doa App API Testing
 
-API testing repository for Islamic Doa (prayer) application features:
+API testing repository for GetDOA : https://getdoa.com/
 
-## Features Being Tested
+## Features Will Be Tested
 
 - Database operations for Doa entries
 - Authentication (OAuth)
@@ -17,7 +17,7 @@ API testing repository for Islamic Doa (prayer) application features:
 ## Tools
 
 - Postman Collections
-- Environment configurations (dev/prod)
+- Environment configurations (Only Prod)
 - Test data samples
 
 ## Setup
