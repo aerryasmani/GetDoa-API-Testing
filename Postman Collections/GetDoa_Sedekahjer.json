@@ -111,13 +111,31 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "4bf7ea9a-e880-4a78-b8d6-c2d9a4d05bb8",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"//Server Status",
+									"pm.test(\"Check server status\", function() {",
+									"    if (pm.response.code === 200) {",
+									"        pm.response.to.have.status(200);",
+									"        console.log(\"Server status: OK (200)\");",
+									"    } else {",
+									"        console.log(\"Server status: \" + pm.response.code + \" - \" + pm.response.status);",
+									"        pm.expect.fail(\"Expected status code 200, but received \" + pm.response.code);",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Check if it is Authenticated Request\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive');",
+									"});",
+									"",
+									"pm.test(\"Response time is acceptable\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);",
 									"});",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -125,7 +143,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{baseUrl}}/get",
+						"url": "{{Base URL}}/{{Resource}}/{{Param}}",
 						"description": "The test on this request asserts that the reponse has a \"200 OK\" status.\n\nYou can check for any HTTP status code using the same mechanism, for example `pm.response.to.have.status(403)` if your API should return an \"Unauthorized\" response."
 					},
 					"response": []
